@@ -172,42 +172,6 @@ Running the scripts creates reproducible local outputs:
 
 Generated CSV and PNG outputs are ignored by Git because they are reproducible from source code.
 
-## Git/GitHub Workflow Used
-
-Recommended branch workflow for the final submission:
-
-```bash
-git checkout main
-git pull origin main
-
-git checkout -b task-2-forecasting-models
-git add .
-git commit -m "Complete ARIMA SARIMA and LSTM forecasting models"
-git push -u origin task-2-forecasting-models
-# Open PR to main and merge
-
-git checkout main
-git pull origin main
-git checkout -b task-3-4-5-optimization-backtesting
-git add .
-git commit -m "Complete future forecasting portfolio optimization and backtesting"
-git push -u origin task-3-4-5-optimization-backtesting
-# Open PR to main and merge
-```
-
-For a faster final submission, one branch can be used:
-
-```bash
-git checkout main
-git pull origin main
-git checkout -b final-submission
-git add .
-git commit -m "Complete final portfolio optimization workflow"
-git push -u origin final-submission
-```
-
-Then create a Pull Request from `final-submission` into `main`, merge it, and submit the final GitHub repository link.
-
 ## Notes on Modeling Decisions
 
 - ARIMA/SARIMA are used as interpretable baselines that align well with technical and business review.
