@@ -1,11 +1,13 @@
-yfinance>=0.2.40
 pandas>=2.0.0
 numpy>=1.24.0
+yfinance>=0.2.40
 matplotlib>=3.7.0
-seaborn>=0.12.0
-statsmodels>=0.14.0
 scikit-learn>=1.3.0
-pmdarima>=2.0.4
+statsmodels>=0.14.0
+scipy>=1.10.0
 pytest>=8.0.0
-jupyter>=1.0.0
 nbformat>=5.9.0
+# TensorFlow is used by the LSTM implementation in Task 2.
+# If installation is heavy on your machine, first run the classical pipeline,
+# then install TensorFlow before running scripts/run_task2_models.py.
+tensorflow>=2.15.0
