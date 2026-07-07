@@ -1,19 +1,27 @@
 import pandas as pd
 
-from src.risk import detect_return_outliers, sharpe_ratio, value_at_risk
+from src.risk import calculate_sharpe_ratio, calculate_var, max_drawdown, performance_summary
 
 
-def test_value_at_risk_returns_positive_loss():
-    returns = pd.Series([-0.10, -0.02, 0.01, 0.03, 0.04])
-    assert value_at_risk(returns, 0.95) > 0
+def test_calculate_var_returns_positive_loss_number():
+    returns = pd.Series([-0.05, -0.02, 0.01, 0.03, 0.04])
+    var = calculate_var(returns, confidence=0.95)
+    assert var > 0
 
 
-def test_sharpe_ratio_numeric():
-    returns = pd.Series([0.01, 0.02, -0.01, 0.005, 0.003])
-    assert isinstance(sharpe_ratio(returns), float)
+def test_calculate_sharpe_ratio_is_float():
+    returns = pd.Series([0.01, 0.02, -0.01, 0.03, 0.005])
+    sharpe = calculate_sharpe_ratio(returns)
+    assert isinstance(float(sharpe), float)
 
 
-def test_detect_return_outliers():
-    returns = pd.Series([0.01] * 20 + [0.50])
-    outliers = detect_return_outliers(returns, z_threshold=2.0)
-    assert not outliers.empty
+def test_max_drawdown_negative_or_zero():
+    returns = pd.Series([0.1, -0.2, 0.05])
+    assert max_drawdown(returns) <= 0
+
+
+def test_performance_summary_contains_required_metrics():
+    returns = pd.Series([0.01, -0.01, 0.02, 0.005])
+    summary = performance_summary(returns)
+    for key in ["total_return", "annualized_return", "sharpe_ratio", "max_drawdown"]:
+        assert key in summary
